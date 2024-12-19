@@ -8,4 +8,5 @@ import "github.com/andrefelizardo/posgoexpert_clean-architecture/internal/usecas
 
 type Resolver struct{
 	CreateOrderUseCase usecase.CreateOrderUseCase
+	FindAllOrdersUseCase usecase.FindOrdersUseCase
 }
