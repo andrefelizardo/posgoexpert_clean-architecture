@@ -10,6 +10,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/andrefelizardo/posgoexpert_clean-architecture/configs"
 	"github.com/andrefelizardo/posgoexpert_clean-architecture/internal/event/handler"
+	"github.com/andrefelizardo/posgoexpert_clean-architecture/internal/infra/database"
 	"github.com/andrefelizardo/posgoexpert_clean-architecture/internal/infra/graph"
 	"github.com/andrefelizardo/posgoexpert_clean-architecture/internal/infra/grpc/pb"
 	"github.com/andrefelizardo/posgoexpert_clean-architecture/internal/infra/grpc/service"
@@ -35,6 +36,11 @@ func main() {
 		panic(err)
 	}
 	defer db.Close()
+
+	err = database.Migrate(db)
+	if err != nil {
+		panic(err)
+	}
 
 	rabbitMQChannel := getRabbitMQChannel()
 
